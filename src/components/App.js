@@ -101,13 +101,17 @@ class App extends Component {
     const movies = this.state.movieInfo;
     let backdropID = this.state.backdropID;
     if (!movies) {
-      return null;
+      return (
+        <div className="p-20 text-center text-white font-serif text-xl">
+          Fetching movie info...
+        </div>
+      );
     }
     const backdrop = this.state.movieInfo[backdropID].backdrop_path;
     const imageUrl = `https://image.tmdb.org/t/p/original${backdrop}`;
     return (
       <div
-        className="App border border-l-8 border-r-8 border-gray-400 container w-3/4 bg-gray-800 mx-auto shadow-lg flex flex-wrap justify-center"
+        className="App font-serif border-b-8 border-l-8 border-r-8 border-gray-400 container w-3/4 bg-gray-800 mx-auto shadow-lg flex flex-wrap justify-center"
         style={{ backgroundImage: `url(${imageUrl})` }}
       >
         {movies.map(i => (
