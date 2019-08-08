@@ -58,7 +58,7 @@ class Movie extends React.Component {
           >
             x
           </div>
-          <h1 className="font-extrabold text-center p-3 border-b bg-gray-400 border-gray-400 text-shadow">
+          <h1 className="MovieHeader font-extrabold text-center p-3 border-b bg-gray-400 border-gray-100 text-shadow">
             {this.props.info.title}
           </h1>
           <p

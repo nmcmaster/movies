@@ -5,6 +5,16 @@ html {
   background-position: center;
 }
 
+.MovieHeader {
+  background-image: linear-gradient(#cbd5e0, white);
+  text-shadow: 1px 1px 1px white;
+}
+
+.MovieModalHeader {
+  background-image: linear-gradient(#e2e8f0, white);
+  text-shadow: 1px 1px 1px white;
+}
+
 .Movie {
   background-color: rgba(255, 255, 255, 0.8);
   background-blend-mode: lighten;

@@ -56,7 +56,7 @@ function MovieModal(props) {
           src={imgURL}
         />
         <div className="rounded-lg border-4">
-          <h1 className="text-center text-2xl font-extrabold p-2 mr-0 my-1 pb-4 border-b border-gray-200">
+          <h1 className="MovieModalHeader text-center text-2xl font-extrabold p-2 mr-0 my-1 pb-4 border-b border-gray-200">
             {props.info.title}
           </h1>
           <h3 className="p-3 mb-2 border-b border-gray-200">
