@@ -21,7 +21,9 @@ class App extends Component {
       idArray: [],
       castArray: [],
       reviewsArray: [],
-      extrasArray: []
+      extrasArray: [],
+      wasDeleted: false,
+      toggleReset: false
     };
     this.backdrop = this.backdrop.bind(this);
   }
@@ -143,6 +145,7 @@ class App extends Component {
             castArray={this.state.castArray}
             reviewsArray={this.state.reviewsArray}
             extrasArray={this.state.extrasArray}
+            wasDeleted={this.state.wasDeleted}
           />
         ))}
       </div>

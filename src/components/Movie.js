@@ -38,13 +38,16 @@ class Movie extends React.Component {
     this.setState({ iExist: false });
     e.stopPropagation();
   }
+  reinstate() {
+    this.setState({ iExist: true });
+  }
   render() {
     if (!this.state.iExist) {
       return "";
     } else {
       return (
         <div
-          className="w-48 h-56 text-xs bg-gray-300 flex-none overflow-hidden m-4 shadow-xl rounded-lg border border-gray-400"
+          className="w-48 h-56 text-xs bg-gray-300 flex-none overflow-hidden m-4 shadow-inner hover:bg-gray-200 hover:border-gray-300 shadow-2xl rounded-lg border border-gray-400"
           onClick={this.showModal}
         >
           <div
