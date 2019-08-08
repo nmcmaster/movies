@@ -44,11 +44,11 @@ class Movie extends React.Component {
     } else {
       return (
         <div
-          className="relative w-48 h-56 text-xs bg-gray-300 flex-none overflow-hidden m-4 shadow-xl rounded-lg border border-gray-400"
+          className="w-48 h-56 text-xs bg-gray-300 flex-none overflow-hidden m-4 shadow-xl rounded-lg border border-gray-400"
           onClick={this.showModal}
         >
           <div
-            className="absolute top-0 right-0 px-1 bg-gray-500 cursor-pointer rounded-bl border-l border-gray-400 text-gray-800 font-sans border-b"
+            className="float-right px-1 bg-gray-500 cursor-pointer rounded-bl border-l border-gray-400 text-gray-800 font-sans border-b"
             onClick={this.stopExist}
           >
             x
