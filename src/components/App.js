@@ -133,7 +133,7 @@ class App extends Component {
     const imageUrl = `https://image.tmdb.org/t/p/original${backdrop}`;
     return (
       <div
-        className="App font-serif border-b-8 border-l-8 border-r-8 border-gray-400 container w-3/4 bg-gray-800 mx-auto shadow-lg flex flex-wrap justify-center"
+        className="App pb-12 font-serif border-b-8 border-l-8 border-r-8 border-gray-400 container w-3/4 bg-gray-800 mx-auto shadow-lg flex flex-wrap justify-center"
         style={{ backgroundImage: `url(${imageUrl})` }}
       >
         {movies.map(i => (

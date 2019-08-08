@@ -56,23 +56,28 @@ function MovieModal(props) {
           src={imgURL}
         />
         <div className="rounded-lg border-4">
-          <h1 className="text-center text-2xl font-extrabold p-3 pr-2 mt-3 mr-0 mb-1 border-b border-gray-200">
+          <h1 className="text-center text-2xl font-extrabold p-2 mr-0 my-1 pb-4 border-b border-gray-200">
             {props.info.title}
           </h1>
           <h3 className="p-3 mb-2 border-b border-gray-200">
-            <p>
+            <p className="mb-3">
               Starring:{" "}
               <span className="font-bold">
                 {cast.cast[0].name}, {cast.cast[1].name}, {cast.cast[2].name},{" "}
                 {cast.cast[3].name}
               </span>
             </p>
+            <p className="mb-1">
+              {cast.crew[0].job}:{" "}
+              <span className="font-bold">{cast.crew[0].name}</span>
+              <br />
+            </p>
             <p>
-              {cast.crew[0].job} {cast.crew[0].name} {cast.crew[1].job}{" "}
-              {cast.crew[1].name}
+              {cast.crew[1].job}:{" "}
+              <span className="font-bold">{cast.crew[1].name}</span>
             </p>
           </h3>
-          <p className="p-3 border-b border-gray-200">
+          <p className="p-3 pt-2 border-b border-gray-200">
             <span className="font-bold">Summary: </span>
             <span className="italic">{props.info.overview}</span>
           </p>
