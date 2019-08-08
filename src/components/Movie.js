@@ -42,6 +42,8 @@ class Movie extends React.Component {
     this.setState({ iExist: true });
   }
   render() {
+    const baseImageUrl = "https://image.tmdb.org/t/p/w300";
+    const imageUrl = baseImageUrl + this.props.info.backdrop_path;
     if (!this.state.iExist) {
       return "";
     } else {
@@ -51,7 +53,7 @@ class Movie extends React.Component {
           onClick={this.showModal}
         >
           <div
-            className="float-right px-1 bg-gray-500 cursor-pointer rounded-bl border-l border-gray-400 text-gray-800 font-sans border-b"
+            className="float-right px-1 bg-gray-500 cursor-pointer rounded-bl border-l border-gray-400 text-gray-900 font-sans border-b"
             onClick={this.stopExist}
           >
             x
@@ -59,7 +61,12 @@ class Movie extends React.Component {
           <h1 className="font-extrabold text-center p-3 border-b bg-gray-400 border-gray-400 text-shadow">
             {this.props.info.title}
           </h1>
-          <p className="p-3">{this.props.info.overview}</p>
+          <p
+            className="Movie p-3 min-h-full"
+            style={{ backgroundImage: `url(${imageUrl})` }}
+          >
+            {this.props.info.overview}
+          </p>
           {this.state.modalView && (
             <MovieModal
               info={this.props.info}

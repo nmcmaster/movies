@@ -52,7 +52,7 @@ function MovieModal(props) {
       >
         {" "}
         <img
-          className="md:w-3/5 sm:w-full md:float-left sm:float-none mr-3 border-gray-500 border-1"
+          className="md:w-3/5 sm:w-full md:float-left sm:float-none mr-3 border-gray-500 rounded-br-lg border-r-2 border-b-2"
           src={imgURL}
         />
         <div className="rounded-lg border-4">
