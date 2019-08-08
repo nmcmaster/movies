@@ -44,9 +44,11 @@ class Movie extends React.Component {
         <p className="p-3">{this.props.info.overview}</p>
         {this.state.modalView && (
           <MovieModal
+            autoFocus
             info={this.props.info}
             castArray={this.props.castArray}
             reviewsArray={this.props.reviewsArray}
+            extrasArray={this.props.extrasArray}
             hideModal={this.hideModal}
             hideWindow={this.hideWindow}
           />

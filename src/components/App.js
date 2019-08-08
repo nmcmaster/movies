@@ -10,6 +10,7 @@ const url = `${PATH_BASE}${API_KEY}`;
 
 const castArray = [];
 const reviewsArray = [];
+const extrasArray = [];
 
 class App extends Component {
   constructor(props) {
@@ -19,7 +20,8 @@ class App extends Component {
       backdropID: 0,
       idArray: [],
       castArray: [],
-      reviewsArray: []
+      reviewsArray: [],
+      extrasArray: []
     };
     this.backdrop = this.backdrop.bind(this);
   }
@@ -35,8 +37,8 @@ class App extends Component {
     this.setState({
       backdropID: this.state.backdropID + i
     });
-    console.log("worked");
-    console.log(this.state.backdropID);
+    //  console.log("worked");
+    //  console.log(this.state.backdropID);
   }
 
   loadReviews() {
@@ -52,8 +54,27 @@ class App extends Component {
     });
   }
 
+  loadExtraMovieInfo() {
+    const extraURL1 = "https://api.themoviedb.org/3/movie/";
+    const extraURL2 = "?" + API_KEY;
+    const idArray = this.state.idArray;
+    idArray.map(i => {
+      const url = extraURL1 + i + extraURL2;
+      fetch(url)
+        .then(response => response.json())
+        .then(result => this.setExtra(result))
+        .catch(error => error);
+    });
+  }
+
+  setExtra(result) {
+    console.log("extras " + result);
+    extrasArray.push(result);
+    this.setState({ extrasArray });
+  }
+
   setReviews(result) {
-    console.log(result);
+    //console.log(result);
     reviewsArray.push(result);
     this.setState({ reviewsArray });
   }
@@ -72,7 +93,7 @@ class App extends Component {
   }
 
   setCast(result) {
-    console.log(result);
+    //  console.log(result);
     castArray.push(result);
     this.setState({ castArray });
   }
@@ -86,6 +107,7 @@ class App extends Component {
     console.log(idArray);
     this.loadCast();
     this.loadReviews();
+    this.loadExtraMovieInfo();
     //  console.log(this.state.movieInfo);
   }
 
@@ -94,7 +116,7 @@ class App extends Component {
       .then(response => response.json())
       .then(result => this.setResult(result))
       .catch(error => error);
-    this.timerID = setInterval(() => this.backdrop(), 65000);
+    this.timerID = setInterval(() => this.backdrop(), 55000);
   }
 
   render() {
@@ -120,6 +142,7 @@ class App extends Component {
             info={i}
             castArray={this.state.castArray}
             reviewsArray={this.state.reviewsArray}
+            extrasArray={this.state.extrasArray}
           />
         ))}
       </div>
