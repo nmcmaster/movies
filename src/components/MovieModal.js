@@ -22,16 +22,18 @@ function MovieModal(props) {
   let extras = props.extrasArray.filter(i => {
     return i.id === props.info.id;
   });
-  extras = extras[0];
   let budget = "";
   let budgetCSS = "";
-  function numberWithCommas(x) {
-    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-  }
-  if (extras.budget) {
-    budget = numberWithCommas(extras.budget);
-    budget = "Budget: $" + budget;
-    budgetCSS = "pl-3 mt-3";
+  if (extras.length !== 0) {
+    extras = extras[0];
+    function numberWithCommas(x) {
+      return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    }
+    if (extras.budget) {
+      budget = numberWithCommas(extras.budget);
+      budget = "Budget: $" + budget;
+      budgetCSS = "pl-3 mt-3";
+    }
   }
 
   //  const review = reviews[0].results[0].content;
