@@ -16,8 +16,8 @@ function MovieModal(props) {
   if (reviewArr) {
     reviews = reviewArr[0];
   }
-  let reviewText = "";
-  let reviewLink;
+  let reviewText;
+  let reviewLink = "";
   let reviewTag;
   let reviewAuthor;
   if (reviews.results.length === 0) {
@@ -59,7 +59,7 @@ function MovieModal(props) {
       }}
     >
       <div
-        className="absolute inset-x-0 top-0 mx-auto mt-32 w-1/2 bg-gray-300 rounded-lg border-4 border-gray-500"
+        className="absolute inset-x-0 top-0 mx-auto mt-32 w-1/2 bg-gray-300 rounded-lg border-4 border-gray-500 hover:bg-gray-300 hover:text-black"
         onClick={props.hideWindow}
       >
         {" "}
@@ -102,7 +102,21 @@ function MovieModal(props) {
           <p className="p-3">
             <span className="font-bold">Review: </span>
             {reviewText}
-            {reviewText ? reviewTag : ""}
+            <br />
+            {reviewLink ? (
+              <span>
+                <a
+                  href={reviewLink}
+                  className="text-blue-700 underline"
+                  alt="review"
+                >
+                  Review
+                </a>{" "}
+                by: {reviewAuthor}
+              </span>
+            ) : (
+              ""
+            )}
           </p>
         </div>
       </div>
