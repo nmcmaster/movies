@@ -111,7 +111,9 @@ class App extends Component {
     //  console.log(idArray);
     this.loadCast();
     this.loadReviews();
-    this.loadExtraMovieInfo();
+    this.timerID = setInterval(() => this.loadExtraMovieInfo(), 10000);
+    this.timerID = setInterval(() => this.loadReviews(), 10000);
+
     //  console.log(this.state.movieInfo);
   }
 
@@ -148,16 +150,24 @@ class App extends Component {
         className="App pb-12 font-serif border-b-8 border-l-8 border-r-8 border-gray-400 container w-3/4 bg-gray-800 mx-auto shadow-lg flex flex-wrap justify-center"
         style={{ backgroundImage: `url(${imageUrl})` }}
       >
-        {movies.map(i => (
-          <Movie
-            key={i.id}
-            info={i}
-            castArray={this.state.castArray}
-            reviewsArray={this.state.reviewsArray}
-            extrasArray={this.state.extrasArray}
-            wasDeleted={this.state.wasDeleted}
-          />
-        ))}
+        <div className="w-full bg-gray-300 text-center MovieHeader py-2 pb-3 text-xl font-bold">
+          <span className="md:inline sm:hidden">
+            TOP <span className="text-2xl"> 20 </span> MOST
+          </span>{" "}
+          PROFITABLE MOVIES
+        </div>
+        <div className="flex flex-wrap justify-center">
+          {movies.map(i => (
+            <Movie
+              key={i.id}
+              info={i}
+              castArray={this.state.castArray}
+              reviewsArray={this.state.reviewsArray}
+              extrasArray={this.state.extrasArray}
+              wasDeleted={this.state.wasDeleted}
+            />
+          ))}
+        </div>
       </div>
     );
   }

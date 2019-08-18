@@ -16,11 +16,17 @@ function MovieModal(props) {
   if (reviewArr) {
     reviews = reviewArr[0];
   }
-  let reviewText;
+  let reviewText = "";
+  let reviewLink;
+  let reviewTag;
+  let reviewAuthor;
   if (reviews.results.length === 0) {
     reviewText = "No reviews available for this movie.";
   } else {
     reviewText = reviews.results[0].content;
+    reviewLink = reviews.results[0].url;
+    reviewAuthor = reviews.results[0].author;
+    reviewTag = `Review by ${reviewAuthor}`;
   }
   let extrasArr = [];
   extrasArr = props.extrasArray.filter(i => {
@@ -89,13 +95,14 @@ function MovieModal(props) {
           </p>
           <p className={budgetCSS}>{budget}</p>
           <p className="pl-3 mt-3">
-            Popularity: {props.info.popularity} Release Date:{" "}
-            {props.info.release_date} Vote Average (out of 10):{" "}
-            {props.info.vote_average}{" "}
+            Release Date: {props.info.release_date}
+            <br />
+            Vote Average (out of 10): {props.info.vote_average}{" "}
           </p>
           <p className="p-3">
             <span className="font-bold">Review: </span>
             {reviewText}
+            {reviewText ? reviewTag : ""}
           </p>
         </div>
       </div>
