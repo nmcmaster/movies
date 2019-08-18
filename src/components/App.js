@@ -23,7 +23,8 @@ class App extends Component {
       reviewsArray: [],
       extrasArray: [],
       wasDeleted: false,
-      toggleReset: false
+      toggleReset: false,
+      failed: false
     };
     this.backdrop = this.backdrop.bind(this);
   }
@@ -101,12 +102,13 @@ class App extends Component {
   }
 
   setResult(result) {
+    console.log(result);
     let idArray = result.results.map(i => i.id);
     this.setState({
       movieInfo: result.results,
       idArray: idArray
     });
-    console.log(idArray);
+    //  console.log(idArray);
     this.loadCast();
     this.loadReviews();
     this.loadExtraMovieInfo();
@@ -117,13 +119,21 @@ class App extends Component {
     fetch(url)
       .then(response => response.json())
       .then(result => this.setResult(result))
-      .catch(error => error);
+      .catch(error => error)
+      .catch(this.setState({ failed: true }));
     this.timerID = setInterval(() => this.backdrop(), 55000);
   }
 
   render() {
     const movies = this.state.movieInfo;
     let backdropID = this.state.backdropID;
+    // if (!movies && this.state.failed) {
+    //   return (
+    //     <div className="p-20 text-center text-white font-serif text-xl">
+    //       I'm sorry, there was a problem retrieving info from The Movie Db.
+    //     </div>
+    //   );
+    // }
     if (!movies) {
       return (
         <div className="p-20 text-center text-white font-serif text-xl">

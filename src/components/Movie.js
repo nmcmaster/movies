@@ -42,7 +42,7 @@ class Movie extends React.Component {
     this.setState({ iExist: true });
   }
   render() {
-    const baseImageUrl = "https://image.tmdb.org/t/p/w300";
+    const baseImageUrl = "https://image.tmdb.org/t/p/w500"; // remember you can go to w300 = 300px
     const imageUrl = baseImageUrl + this.props.info.backdrop_path;
     if (!this.state.iExist) {
       return "";
