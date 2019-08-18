@@ -9,35 +9,39 @@ function MovieModal(props) {
   const baseURL = "https://image.tmdb.org/t/p/w500";
   const imgPath = props.info.poster_path;
   const imgURL = baseURL + imgPath;
-  let reviews = props.reviewsArray.filter(i => {
+  const reviewArr = props.reviewsArray.filter(i => {
     return i.id === props.info.id;
   });
-  reviews = reviews[0];
+  let reviews = [];
+  if (reviewArr) {
+    reviews = reviewArr[0];
+  }
   let reviewText;
   if (reviews.results.length === 0) {
     reviewText = "No reviews available for this movie.";
   } else {
     reviewText = reviews.results[0].content;
   }
-  let extras = props.extrasArray.filter(i => {
+  let extrasArr = [];
+  extrasArr = props.extrasArray.filter(i => {
     return i.id === props.info.id;
   });
   let budget = "";
   let budgetCSS = "";
-  if (extras.length !== 0) {
-    extras = extras[0];
-    function numberWithCommas(x) {
-      return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-    }
-    if (extras.budget) {
-      budget = numberWithCommas(extras.budget);
-      budget = "Budget: $" + budget;
-      budgetCSS = "pl-3 mt-3";
-    }
+  let extras = {};
+  extras.budget = 0;
+  function numberWithCommas(x) {
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  }
+  if (extrasArr.length !== 0) {
+    extras = extrasArr[0];
+  }
+  if (extras.budget !== 0) {
+    budget = numberWithCommas(extras.budget);
+    budget = "Budget: $" + budget;
+    budgetCSS = "pl-3 mt-3";
   }
 
-  //  const review = reviews[0].results[0].content;
-  console.log(extras);
   return (
     <OutsideClickHandler
       onOutsideClick={e => {
