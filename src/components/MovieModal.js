@@ -4,6 +4,7 @@ import Budget from "./Budget";
 import Revenue from "./Revenue";
 import Cast from "./Cast";
 import Crew from "./Crew";
+import Review from "./Review";
 
 function MovieModal(props) {
   const baseURL = "https://image.tmdb.org/t/p/w500";
@@ -26,22 +27,10 @@ function MovieModal(props) {
   if (reviewArr.length !== 0) {
     reviews = reviewArr[0];
   }
-  let reviewText;
-  let reviewLink = "";
-  let reviewAuthor;
-  if (reviews.results.length === 0) {
-    reviewText = "No reviews available for this movie.";
-  } else {
-    reviewText = reviews.results[0].content;
-    reviewLink = reviews.results[0].url;
-    reviewAuthor = reviews.results[0].author;
-  }
   let extrasArr = [];
   extrasArr = props.extrasArray.filter(i => {
     return i.id === props.info.id;
   });
-  let revenue = ""; //complete this!
-  let revenueCSS = "pl-3 mt-3";
 
   return (
     <OutsideClickHandler
@@ -83,23 +72,7 @@ function MovieModal(props) {
             Vote Average (out of 10): {props.info.vote_average}{" "}
           </p>
           <p className="p-3">
-            <span className="font-bold">Review: </span>
-            {reviewText}
-            <br />
-            {reviewLink ? (
-              <span>
-                <a
-                  href={reviewLink}
-                  className="text-blue-700 underline"
-                  alt="review"
-                >
-                  Review
-                </a>{" "}
-                by: {reviewAuthor}
-              </span>
-            ) : (
-              ""
-            )}
+            <Review reviews={reviews} />
           </p>
         </div>
       </div>
