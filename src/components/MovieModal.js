@@ -59,8 +59,9 @@ function MovieModal(props) {
       }}
     >
       <div
-        className="absolute inset-x-0 top-0 mx-auto mt-32 w-1/2 bg-gray-300 rounded-lg border-4 border-gray-500 hover:bg-gray-300 hover:text-black"
+        className="fixed inset-x-0 top-0 mx-auto mt-10 overflow-x-auto sm:w-1/2 w-5/6 bg-gray-300 rounded-lg border-4 border-gray-500 hover:bg-gray-300 hover:text-black"
         onClick={props.hideWindow}
+        style={{ maxHeight: "90%" }}
       >
         {" "}
         <img

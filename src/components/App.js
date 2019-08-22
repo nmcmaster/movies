@@ -136,7 +136,7 @@ class App extends Component {
         style={{ backgroundImage: `url(${imageUrl})` }}
       >
         <div className="w-full bg-gray-300 text-center MovieHeader py-2 pb-3 text-xl font-bold">
-          <span className="md:inline sm:hidden">
+          <span className="hidden sm:inline">
             TOP <span className="text-2xl"> 20 </span> MOST
           </span>{" "}
           PROFITABLE MOVIES OF <span className="text-2xl"> {year} </span>
