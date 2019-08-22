@@ -2,24 +2,28 @@ import React from "react";
 import OutsideClickHandler from "react-outside-click-handler";
 
 function MovieModal(props) {
-  cast = props.castArray.filter(i => {
-    return i.id === props.info.id;
-  });
-  cast = cast[0];
   const baseURL = "https://image.tmdb.org/t/p/w500";
   const imgPath = props.info.poster_path;
   const imgURL = baseURL + imgPath;
+  let cast = {}; // have to do some acrobatics because if their aren't results from api, the undefined object will break my if statements
+  cast.cast = [];
+  cast.crew = [];
+  let castArr = props.castArray.filter(i => {
+    return i.id === props.info.id;
+  });
+  if (castArr.length !== 0) {
+    cast = castArr[0];
+  }
   const reviewArr = props.reviewsArray.filter(i => {
     return i.id === props.info.id;
   });
   let reviews = {};
   reviews.results = [];
-  if (reviewArr) {
+  if (reviewArr.length !== 0) {
     reviews = reviewArr[0];
   }
   let reviewText;
   let reviewLink = "";
-  let reviewTag;
   let reviewAuthor;
   if (reviews.results.length === 0) {
     reviewText = "No reviews available for this movie.";
@@ -27,7 +31,6 @@ function MovieModal(props) {
     reviewText = reviews.results[0].content;
     reviewLink = reviews.results[0].url;
     reviewAuthor = reviews.results[0].author;
-    reviewTag = `Review by ${reviewAuthor}`;
   }
   let extrasArr = [];
   extrasArr = props.extrasArray.filter(i => {
@@ -48,7 +51,7 @@ function MovieModal(props) {
     budget = "Budget: $" + budget;
     budgetCSS = "pl-3 mt-3";
   }
-  let revenue = "";
+  let revenue = ""; //complete this!
   let revenueCSS = "pl-3 mt-3";
 
   return (
@@ -76,22 +79,50 @@ function MovieModal(props) {
             {props.info.title}
           </h1>
           <h3 className="p-3 mb-2 border-b border-gray-200">
-            <p className="mb-3">
-              Starring:{" "}
-              <span className="font-bold">
-                {cast.cast[0].name}, {cast.cast[1].name}, {cast.cast[2].name},{" "}
-                {cast.cast[3].name}
-              </span>
-            </p>
-            <p className="mb-1">
-              {cast.crew[0].job}:{" "}
-              <span className="font-bold">{cast.crew[0].name}</span>
-              <br />
-            </p>
-            <p>
-              {cast.crew[1].job}:{" "}
-              <span className="font-bold">{cast.crew[1].name}</span>
-            </p>
+            {cast.cast.length !== 0 ? (
+              <p className="mb-3">
+                Starring:{" "}
+                <span className="font-bold">
+                  {cast.cast[0].name}
+                  {cast.cast.length > 1 ? (
+                    <span>, {cast.cast[1].name}</span>
+                  ) : (
+                    ""
+                  )}
+                  {cast.cast.length > 2 ? (
+                    <span>, {cast.cast[2].name}</span>
+                  ) : (
+                    ""
+                  )}
+                  {cast.cast.length > 3 ? (
+                    <span>, {cast.cast[3].name}</span>
+                  ) : (
+                    ""
+                  )}
+                </span>
+              </p>
+            ) : (
+              <p>No cast information available for this movie.</p>
+            )}
+            {cast.crew.length !== 0 ? (
+              <div>
+                <p className="mb-1">
+                  {cast.crew[0].job}:{" "}
+                  <span className="font-bold">{cast.crew[0].name}</span>
+                  <br />
+                </p>
+                {cast.crew.length > 1 ? (
+                  <p>
+                    {cast.crew[1].job}:{" "}
+                    <span className="font-bold">{cast.crew[1].name}</span>
+                  </p>
+                ) : (
+                  ""
+                )}
+              </div>
+            ) : (
+              <p>No crew information available for this movie.</p>
+            )}
           </h3>
           <p className="p-3 pt-2 border-b border-gray-200">
             <span className="font-bold">Summary: </span>
