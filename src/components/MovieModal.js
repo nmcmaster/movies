@@ -2,6 +2,7 @@ import React from "react";
 import OutsideClickHandler from "react-outside-click-handler";
 import Budget from "./Budget";
 import Revenue from "./Revenue";
+import Cast from "./Cast";
 
 function MovieModal(props) {
   const baseURL = "https://image.tmdb.org/t/p/w500";
@@ -66,31 +67,7 @@ function MovieModal(props) {
             {props.info.title}
           </h1>
           <h3 className="p-3 mb-2 border-b border-gray-200">
-            {cast.cast.length !== 0 ? (
-              <p className="mb-3">
-                Starring:{" "}
-                <span className="font-bold">
-                  {cast.cast[0].name}
-                  {cast.cast.length > 1 ? (
-                    <span>, {cast.cast[1].name}</span>
-                  ) : (
-                    ""
-                  )}
-                  {cast.cast.length > 2 ? (
-                    <span>, {cast.cast[2].name}</span>
-                  ) : (
-                    ""
-                  )}
-                  {cast.cast.length > 3 ? (
-                    <span>, {cast.cast[3].name}</span>
-                  ) : (
-                    ""
-                  )}
-                </span>
-              </p>
-            ) : (
-              <p>No cast information available for this movie.</p>
-            )}
+            <Cast cast={cast} />
             {cast.crew.length !== 0 ? (
               <div>
                 <p className="mb-1">
