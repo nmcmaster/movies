@@ -3,6 +3,7 @@ import OutsideClickHandler from "react-outside-click-handler";
 import Budget from "./Budget";
 import Revenue from "./Revenue";
 import Cast from "./Cast";
+import Crew from "./Crew";
 
 function MovieModal(props) {
   const baseURL = "https://image.tmdb.org/t/p/w500";
@@ -68,25 +69,7 @@ function MovieModal(props) {
           </h1>
           <h3 className="p-3 mb-2 border-b border-gray-200">
             <Cast cast={cast} />
-            {cast.crew.length !== 0 ? (
-              <div>
-                <p className="mb-1">
-                  {cast.crew[0].job}:{" "}
-                  <span className="font-bold">{cast.crew[0].name}</span>
-                  <br />
-                </p>
-                {cast.crew.length > 1 ? (
-                  <p>
-                    {cast.crew[1].job}:{" "}
-                    <span className="font-bold">{cast.crew[1].name}</span>
-                  </p>
-                ) : (
-                  ""
-                )}
-              </div>
-            ) : (
-              <p>No crew information available for this movie.</p>
-            )}
+            <Crew cast={cast} />
           </h3>
           <p className="p-3 pt-2 border-b border-gray-200">
             <span className="font-bold">Summary: </span>
