@@ -5,6 +5,7 @@ import Revenue from "./Revenue";
 import Cast from "./Cast";
 import Crew from "./Crew";
 import Review from "./Review";
+import Summary from "./Summary";
 
 function MovieModal(props) {
   const baseURL = "https://image.tmdb.org/t/p/w500";
@@ -61,8 +62,7 @@ function MovieModal(props) {
             <Crew cast={cast} />
           </h3>
           <p className="p-3 pt-2 border-b border-gray-200">
-            <span className="font-bold">Summary: </span>
-            <span className="italic">{props.info.overview}</span>
+            <Summary overview={props.info.overview} />
           </p>
           <Revenue extrasArr={extrasArr} />
           <Budget extrasArr={extrasArr} />
