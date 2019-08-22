@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import MovieModal from "./MovieModal";
 
 class Movie extends React.Component {

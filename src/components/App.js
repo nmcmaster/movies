@@ -68,7 +68,7 @@ class App extends Component {
     const reviewsURL1 = "https://api.themoviedb.org/3/movie/";
     const reviewsURL2 = "/reviews?" + API_KEY;
     const idArray = this.state.idArray;
-    idArray.map(i => {
+    idArray.forEach(i => {
       const url = reviewsURL1 + i + reviewsURL2;
       fetch(url)
         .then(response => response.json())
@@ -81,7 +81,7 @@ class App extends Component {
     const extraURL1 = "https://api.themoviedb.org/3/movie/";
     const extraURL2 = "?" + API_KEY;
     const idArray = this.state.idArray;
-    idArray.map(i => {
+    idArray.forEach(i => {
       const url = extraURL1 + i + extraURL2;
       fetch(url)
         .then(response => response.json())
@@ -104,7 +104,7 @@ class App extends Component {
     const creditsURL1 = "https://api.themoviedb.org/3/movie/";
     const creditsURL2 = "/credits?" + API_KEY;
     const idArray = this.state.idArray;
-    idArray.map(i => {
+    idArray.forEach(i => {
       const url = creditsURL1 + i + creditsURL2;
       fetch(url)
         .then(response => response.json())
