@@ -29,6 +29,30 @@ class App extends Component {
     this.backdrop = this.backdrop.bind(this);
   }
 
+  componentDidMount() {
+    fetch(url)
+      .then(response => response.json())
+      .then(result => this.setResult(result))
+      .catch(error => error)
+      .catch(this.setState({ failed: true }));
+    this.timerID = setInterval(() => this.backdrop(), 55000);
+  } // initial discover api query
+
+  setResult(result) {
+    console.log(result);
+    let idArray = result.results.map(i => i.id);
+    this.setState({
+      movieInfo: result.results,
+      idArray: idArray
+    });
+    this.loadCast();
+    this.loadReviews();
+    this.timerID = setInterval(() => this.loadExtraMovieInfo(), 10000);
+    // TMDB limits to 40 queries every 10 seconds. since the budget data is low-priority, I delay its query
+    this.timerID = setInterval(() => this.loadReviews(), 10000);
+    // the last one or two of the reviews hit the query cap, so re-query to get them all
+  } // setResult writes the response to state and calls functions to perform additional queries on the 20 movies, using their obtained TMDB ids.
+
   backdrop() {
     let i = 1;
 
@@ -97,41 +121,9 @@ class App extends Component {
     this.setState({ castArray });
   }
 
-  setResult(result) {
-    console.log(result);
-    let idArray = result.results.map(i => i.id);
-    this.setState({
-      movieInfo: result.results,
-      idArray: idArray
-    });
-    //  console.log(idArray);
-    this.loadCast();
-    this.loadReviews();
-    this.timerID = setInterval(() => this.loadExtraMovieInfo(), 10000);
-    this.timerID = setInterval(() => this.loadReviews(), 10000);
-
-    //  console.log(this.state.movieInfo);
-  }
-
-  componentDidMount() {
-    fetch(url)
-      .then(response => response.json())
-      .then(result => this.setResult(result))
-      .catch(error => error)
-      .catch(this.setState({ failed: true }));
-    this.timerID = setInterval(() => this.backdrop(), 55000);
-  }
-
   render() {
     const movies = this.state.movieInfo;
     let backdropID = this.state.backdropID;
-    // if (!movies && this.state.failed) {
-    //   return (
-    //     <div className="p-20 text-center text-white font-serif text-xl">
-    //       I'm sorry, there was a problem retrieving info from The Movie Db.
-    //     </div>
-    //   );
-    // }
     if (!movies) {
       return (
         <div className="p-20 text-center text-white font-serif text-xl">
