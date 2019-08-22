@@ -36,11 +36,7 @@ function MovieModal(props) {
   return (
     <OutsideClickHandler
       onOutsideClick={e => {
-        {
-          {
-            props.hideModal(e);
-          }
-        }
+        props.hideModal(e);
       }}
     >
       <div
@@ -52,6 +48,7 @@ function MovieModal(props) {
         <img
           className="md:w-3/5 sm:w-full md:float-left sm:float-none mr-3 border-gray-500 rounded-br-lg border-r-2 border-b-2"
           src={imgURL}
+          alt={props.info.title}
         />
         <div className="rounded-lg border-4">
           <h1 className="MovieModalHeader text-center text-2xl font-extrabold p-2 mr-0 my-1 pb-4 border-b border-gray-200">
@@ -71,9 +68,9 @@ function MovieModal(props) {
             <br />
             Vote Average (out of 10): {props.info.vote_average}{" "}
           </p>
-          <p className="p-3">
+          <div className="p-3">
             <Review reviews={reviews} />
-          </p>
+          </div>
         </div>
       </div>
     </OutsideClickHandler>
