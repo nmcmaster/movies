@@ -38,8 +38,8 @@ class App extends Component {
     this.timerID = setInterval(() => this.backdrop(), 55000);
   } // initial discover api query
 
+  // setResult writes the response to state and calls functions to perform additional queries on the 20 movies, using their obtained TMDB ids.
   setResult(result) {
-    console.log(result);
     let idArray = result.results.map(i => i.id);
     this.setState({
       movieInfo: result.results,
@@ -51,7 +51,7 @@ class App extends Component {
     // TMDB limits to 40 queries every 10 seconds. since the budget data is low-priority, I delay its query
     this.timerID = setInterval(() => this.loadReviews(), 10000);
     // the last one or two of the reviews hit the query cap, so re-query to get them all
-  } // setResult writes the response to state and calls functions to perform additional queries on the 20 movies, using their obtained TMDB ids.
+  }
 
   backdrop() {
     let i = 1;
@@ -91,13 +91,11 @@ class App extends Component {
   }
 
   setExtra(result) {
-    console.log("extras " + result);
     extrasArray.push(result);
     this.setState({ extrasArray });
   }
 
   setReviews(result) {
-    //console.log(result);
     reviewsArray.push(result);
     this.setState({ reviewsArray });
   }
@@ -116,7 +114,6 @@ class App extends Component {
   }
 
   setCast(result) {
-    //  console.log(result);
     castArray.push(result);
     this.setState({ castArray });
   }

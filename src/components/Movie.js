@@ -32,7 +32,6 @@ class Movie extends React.Component {
   }
   hideWindow(e) {
     this.setState({ modalView: false });
-    console.log("hide Window worked");
   }
   stopExist(e) {
     this.setState({ iExist: false });
