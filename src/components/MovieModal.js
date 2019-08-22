@@ -2,7 +2,7 @@ import React from "react";
 import OutsideClickHandler from "react-outside-click-handler";
 
 function MovieModal(props) {
-  let cast = props.castArray.filter(i => {
+  cast = props.castArray.filter(i => {
     return i.id === props.info.id;
   });
   cast = cast[0];
@@ -12,7 +12,8 @@ function MovieModal(props) {
   const reviewArr = props.reviewsArray.filter(i => {
     return i.id === props.info.id;
   });
-  let reviews = [];
+  let reviews = {};
+  reviews.results = [];
   if (reviewArr) {
     reviews = reviewArr[0];
   }
@@ -47,6 +48,8 @@ function MovieModal(props) {
     budget = "Budget: $" + budget;
     budgetCSS = "pl-3 mt-3";
   }
+  let revenue = "";
+  let revenueCSS = "pl-3 mt-3";
 
   return (
     <OutsideClickHandler
