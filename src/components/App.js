@@ -6,7 +6,7 @@ import moment from "moment";
 const PATH_BASE = "https://api.themoviedb.org/3/discover/movie?";
 const API_KEY = "api_key=07b4b9699aaec322c47629fd7878040b";
 const year = moment().format("YYYY");
-const url = `${PATH_BASE}${API_KEY}&primary_release_year=${year}&sort_by=revenue.asc`;
+const url = `${PATH_BASE}${API_KEY}&primary_release_year=${year}&sort_by=revenue.desc`;
 
 const castArray = [];
 const reviewsArray = [];

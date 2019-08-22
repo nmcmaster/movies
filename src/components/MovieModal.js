@@ -1,5 +1,6 @@
 import React from "react";
 import OutsideClickHandler from "react-outside-click-handler";
+import Budget from "./Budget";
 
 function MovieModal(props) {
   const baseURL = "https://image.tmdb.org/t/p/w500";
@@ -36,21 +37,6 @@ function MovieModal(props) {
   extrasArr = props.extrasArray.filter(i => {
     return i.id === props.info.id;
   });
-  let budget = "";
-  let budgetCSS = "";
-  let extras = {};
-  extras.budget = 0;
-  function numberWithCommas(x) {
-    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-  }
-  if (extrasArr.length !== 0) {
-    extras = extrasArr[0];
-  }
-  if (extras.budget !== 0) {
-    budget = numberWithCommas(extras.budget);
-    budget = "Budget: $" + budget;
-    budgetCSS = "pl-3 mt-3";
-  }
   let revenue = ""; //complete this!
   let revenueCSS = "pl-3 mt-3";
 
@@ -128,7 +114,7 @@ function MovieModal(props) {
             <span className="font-bold">Summary: </span>
             <span className="italic">{props.info.overview}</span>
           </p>
-          <p className={budgetCSS}>{budget}</p>
+          <Budget extrasArr={extrasArr} />
           <p className="pl-3 mt-3">
             Release Date: {props.info.release_date}
             <br />
