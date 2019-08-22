@@ -1,12 +1,12 @@
 import React, { Component } from "react";
 import "./App.css";
 import Movie from "./Movie";
-
-const DEFAULT_QUERY = "";
+import moment from "moment";
 
 const PATH_BASE = "https://api.themoviedb.org/3/discover/movie?";
 const API_KEY = "api_key=07b4b9699aaec322c47629fd7878040b";
-const url = `${PATH_BASE}${API_KEY}`;
+const year = moment().format("YYYY");
+const url = `${PATH_BASE}${API_KEY}&primary_release_year=${year}&sort_by=revenue.desc`;
 
 const castArray = [];
 const reviewsArray = [];
@@ -35,13 +35,9 @@ class App extends Component {
     if (this.state.backdropID === 19) {
       i = -19;
     }
-
-    // console.log(i);
     this.setState({
       backdropID: this.state.backdropID + i
     });
-    //  console.log("worked");
-    //  console.log(this.state.backdropID);
   }
 
   loadReviews() {
@@ -154,7 +150,7 @@ class App extends Component {
           <span className="md:inline sm:hidden">
             TOP <span className="text-2xl"> 20 </span> MOST
           </span>{" "}
-          PROFITABLE MOVIES
+          PROFITABLE MOVIES OF <span className="text-2xl"> {year} </span>
         </div>
         <div className="flex flex-wrap justify-center">
           {movies.map(i => (
