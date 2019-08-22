@@ -14,7 +14,7 @@ function Budget(props) {
   if (extras.budget !== 0) {
     budget = numberWithCommas(extras.budget);
     budget = "Budget: $" + budget;
-    budgetCSS = "pl-3 mt-3";
+    budgetCSS = "pl-3";
   }
   return <p className={budgetCSS}>{budget}</p>;
 }

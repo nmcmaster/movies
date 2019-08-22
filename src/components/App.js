@@ -137,9 +137,10 @@ class App extends Component {
       >
         <div className="w-full bg-gray-300 text-center MovieHeader py-2 pb-3 text-xl font-bold">
           <span className="hidden sm:inline">
-            TOP <span className="text-2xl"> 20 </span> MOST
+            THE <span className="text-2xl"> 20 </span> BIGGEST
           </span>{" "}
-          PROFITABLE MOVIES OF <span className="text-2xl"> {year} </span>
+          BLOCKBUSTER MOVIES <span className="hidden sm:inline">OF</span>{" "}
+          <span className="text-2xl"> {year} </span>
         </div>
         <div className="flex flex-wrap justify-center">
           {movies.map(i => (

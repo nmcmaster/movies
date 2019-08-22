@@ -1,6 +1,7 @@
 import React from "react";
 import OutsideClickHandler from "react-outside-click-handler";
 import Budget from "./Budget";
+import Revenue from "./Revenue";
 
 function MovieModal(props) {
   const baseURL = "https://image.tmdb.org/t/p/w500";
@@ -114,6 +115,7 @@ function MovieModal(props) {
             <span className="font-bold">Summary: </span>
             <span className="italic">{props.info.overview}</span>
           </p>
+          <Revenue extrasArr={extrasArr} />
           <Budget extrasArr={extrasArr} />
           <p className="pl-3 mt-3">
             Release Date: {props.info.release_date}
