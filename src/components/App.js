@@ -1,12 +1,12 @@
 import React, { Component } from "react";
 import "./App.css";
 import Movie from "./Movie";
-
-const DEFAULT_QUERY = "";
+import moment from "moment";
 
 const PATH_BASE = "https://api.themoviedb.org/3/discover/movie?";
 const API_KEY = "api_key=07b4b9699aaec322c47629fd7878040b";
-const url = `${PATH_BASE}${API_KEY}`;
+const year = moment().format("YYYY");
+const url = `${PATH_BASE}${API_KEY}&primary_release_year=${year}&sort_by=revenue.desc`;
 
 const castArray = [];
 const reviewsArray = [];
@@ -29,19 +29,39 @@ class App extends Component {
     this.backdrop = this.backdrop.bind(this);
   }
 
+  componentDidMount() {
+    fetch(url)
+      .then(response => response.json())
+      .then(result => this.setResult(result))
+      .catch(error => error)
+      .catch(this.setState({ failed: true }));
+    this.timerID = setInterval(() => this.backdrop(), 55000);
+  } // initial discover api query
+
+  // setResult writes the response to state and calls functions to perform additional queries on the 20 movies, using their obtained TMDB ids.
+  setResult(result) {
+    let idArray = result.results.map(i => i.id);
+    this.setState({
+      movieInfo: result.results,
+      idArray: idArray
+    });
+    this.loadCast();
+    this.loadReviews();
+    this.timerID = setInterval(() => this.loadExtraMovieInfo(), 10000);
+    // TMDB limits to 40 queries every 10 seconds. since the budget data is low-priority, I delay its query
+    this.timerID = setInterval(() => this.loadReviews(), 10000);
+    // the last one or two of the reviews hit the query cap, so re-query to get them all
+  }
+
   backdrop() {
     let i = 1;
 
     if (this.state.backdropID === 19) {
       i = -19;
     }
-
-    // console.log(i);
     this.setState({
       backdropID: this.state.backdropID + i
     });
-    //  console.log("worked");
-    //  console.log(this.state.backdropID);
   }
 
   loadReviews() {
@@ -71,13 +91,11 @@ class App extends Component {
   }
 
   setExtra(result) {
-    console.log("extras " + result);
     extrasArray.push(result);
     this.setState({ extrasArray });
   }
 
   setReviews(result) {
-    //console.log(result);
     reviewsArray.push(result);
     this.setState({ reviewsArray });
   }
@@ -96,46 +114,13 @@ class App extends Component {
   }
 
   setCast(result) {
-    //  console.log(result);
     castArray.push(result);
     this.setState({ castArray });
-  }
-
-  setResult(result) {
-    console.log(result);
-    let idArray = result.results.map(i => i.id);
-    this.setState({
-      movieInfo: result.results,
-      idArray: idArray
-    });
-    //  console.log(idArray);
-    this.loadCast();
-    this.loadReviews();
-    this.timerID = setInterval(() => this.loadExtraMovieInfo(), 10000);
-    this.timerID = setInterval(() => this.loadReviews(), 10000);
-
-    //  console.log(this.state.movieInfo);
-  }
-
-  componentDidMount() {
-    fetch(url)
-      .then(response => response.json())
-      .then(result => this.setResult(result))
-      .catch(error => error)
-      .catch(this.setState({ failed: true }));
-    this.timerID = setInterval(() => this.backdrop(), 55000);
   }
 
   render() {
     const movies = this.state.movieInfo;
     let backdropID = this.state.backdropID;
-    // if (!movies && this.state.failed) {
-    //   return (
-    //     <div className="p-20 text-center text-white font-serif text-xl">
-    //       I'm sorry, there was a problem retrieving info from The Movie Db.
-    //     </div>
-    //   );
-    // }
     if (!movies) {
       return (
         <div className="p-20 text-center text-white font-serif text-xl">
@@ -151,10 +136,11 @@ class App extends Component {
         style={{ backgroundImage: `url(${imageUrl})` }}
       >
         <div className="w-full bg-gray-300 text-center MovieHeader py-2 pb-3 text-xl font-bold">
-          <span className="md:inline sm:hidden">
-            TOP <span className="text-2xl"> 20 </span> MOST
+          <span className="hidden sm:inline">
+            THE <span className="text-2xl"> 20 </span> BIGGEST
           </span>{" "}
-          PROFITABLE MOVIES
+          BLOCKBUSTER MOVIES <span className="hidden sm:inline">OF</span>{" "}
+          <span className="text-2xl"> {year} </span>
         </div>
         <div className="flex flex-wrap justify-center">
           {movies.map(i => (
