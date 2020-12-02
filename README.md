@@ -1,3 +1,7 @@
+// this is a bit old, thus the use of class components, but I think it mostly holds up! Hosted at:
+
+http://hospitable-sign.surge.sh/
+
 Hello! Thank you for taking a look at my TMDB API app, created with React and Tailwind CSS. 
 Some things I think are neat about this app:
 
